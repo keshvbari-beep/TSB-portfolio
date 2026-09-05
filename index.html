@@ -50,10 +50,10 @@ body.light .card{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.08)}
 .card::before{content:"";position:absolute;inset:0;background-size:cover;background-position:center;z-index:0}
 .card::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.65);z-index:1}
 
-/* Online images: put the original photos in the images folder with these exact names. */
-.card-music::before{background-image:url('images/music.jpg')}
-.card-photo::before{background-image:url('images/photo.jpg')}
-.card-travel::before{background-image:url('images/travel.jpg')}
+/* 3 About images */
+.card-music::before{background-image:url('music.jpg')}
+.card-photo::before{background-image:url('photo.jpg')}
+.card-travel::before{background-image:url('travel.jpg')}
 
 /* Social Media Cards */
 .social{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:35px}
@@ -70,13 +70,13 @@ body.light .card{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.08)}
 .social a span{position:relative;z-index:2;font-weight:700;font-size:16px}
 .social a b{position:relative;z-index:2;font-size:20px}
 
-/* Social images */
-.social-youtube::before{background-image:url('images/youtube.jpg')}
-.social-instagram::before{background-image:url('images/instagram.jpg')}
-.social-facebook::before{background-image:url('images/facebook.jpg')}
-.social-telegram::before{background-image:url('images/telegram.jpg')}
-.social-twitter::before{background-image:url('images/twitter.jpg')}
-.social-website::before{background-image:url('images/website.jpg')}
+/* 6 Social images */
+.social-youtube::before{background-image:url('youtube.jpg')}
+.social-instagram::before{background-image:url('instagram.jpg')}
+.social-facebook::before{background-image:url('facebook.jpg')}
+.social-telegram::before{background-image:url('telegram.jpg')}
+.social-twitter::before{background-image:url('twitter.jpg')}
+.social-website::before{background-image:url('website.jpg')}
 
 footer{padding:45px 7%;text-align:center;color:#777;border-top:1px solid rgba(255,255,255,.08)}
 #intro{position:fixed;inset:0;background:#05060a;z-index:50;display:grid;place-items:center;text-align:center;padding:30px;transition:opacity .7s,visibility .7s}
@@ -91,10 +91,10 @@ footer{padding:45px 7%;text-align:center;color:#777;border-top:1px solid rgba(25
 .reveal{opacity:0;transform:translateY(45px);transition:1s ease}
 .reveal.show{opacity:1;transform:none}
 
-/* Welcome card with online background */
+/* Welcome image */
 .welcome-card {
   position:relative;border-radius:20px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,0.6);
-  background:url('images/welcome.jpg') center/cover no-repeat;margin:30px auto;max-width:500px
+  background:url('welcome.jpg') center/cover no-repeat;margin:30px auto;max-width:500px
 }
 .welcome-card::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.5),rgba(0,0,0,0.8));z-index:1}
 .welcome-card .card-content{position:relative;z-index:2;padding:40px 25px 50px;text-align:center;color:#fff}
@@ -204,4 +204,3 @@ document.querySelectorAll('.reveal,.card').forEach(x=>observer.observe(x));
 </script>
 </body>
   </html>
-  
