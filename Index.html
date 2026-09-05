@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TSB — Personal Portfolio</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:#07080c;color:#fff;overflow-x:hidden}
+body.light{background:#f4f5f7;color:#111}
+#bg{position:fixed;inset:0;z-index:-2;background:
+radial-gradient(circle at 15% 20%,rgba(76,120,255,.22),transparent 28%),
+radial-gradient(circle at 85% 70%,rgba(176,70,255,.18),transparent 30%),
+linear-gradient(135deg,#07080c,#10131c 50%,#07080c)}
+#bg:after{content:"";position:absolute;inset:-20%;background:
+radial-gradient(circle,rgba(255,255,255,.09) 1px,transparent 1.5px);
+background-size:42px 42px;animation:drift 24s linear infinite;opacity:.35}
+@keyframes drift{to{transform:translate3d(42px,42px,0)}}
+header{position:fixed;top:0;left:0;right:0;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;z-index:20;background:rgba(7,8,12,.42);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)}
+body.light header{background:rgba(255,255,255,.65);border-color:rgba(0,0,0,.08)}
+.logo{font-size:25px;font-weight:900;letter-spacing:3px}
+.nav{display:flex;gap:10px}
+.icon{width:42px;height:42px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:inherit;border-radius:50%;cursor:pointer;font-size:18px}
+body.light .icon{border-color:rgba(0,0,0,.12);background:rgba(0,0,0,.05)}
+main{position:relative}
+section{min-height:100vh;padding:120px 7%;display:flex;align-items:center}
+.hero{justify-content:center;text-align:center;position:relative}
+.hero-inner{max-width:850px}
+.badge{display:inline-block;padding:8px 14px;border:1px solid rgba(255,255,255,.16);border-radius:99px;background:rgba(255,255,255,.06);font-size:13px;margin-bottom:25px}
+.profile{width:130px;height:130px;border-radius:50%;margin:auto auto 25px;display:grid;place-items:center;background:linear-gradient(135deg,#fff,#fff);color:#111;font-size:40px;font-weight:900;border:4px solid rgba(255,255,255,.2);box-shadow:0 0 60px rgba(100,130,255,.28)}
+h1{font-size:clamp(48px,10vw,105px);line-height:.95;letter-spacing:-5px}
+.gradient{background:linear-gradient(90deg,#fff,#8fa8ff,#d39cff,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:650px;margin:25px auto;color:#aeb4c3;font-size:18px;line-height:1.7}
+body.light .hero p{color:#555}
+.cta{display:inline-flex;gap:10px;padding:14px 22px;border-radius:14px;background:#fff;color:#111;text-decoration:none;font-weight:800;margin-top:10px;transition:.25s}
+.cta:hover{transform:translateY(-3px)}
+.content{max-width:1100px;width:100%;margin:auto}
+.kicker{color:#9da8ff;text-transform:uppercase;letter-spacing:3px;font-size:12px;font-weight:800;margin-bottom:12px}
+h2{font-size:clamp(38px,6vw,70px);letter-spacing:-3px;margin-bottom:25px}
+.text{max-width:700px;color:#adb3c2;font-size:18px;line-height:1.8}
+body.light .text{color:#555}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:45px}
+.card{padding:28px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.055);border-radius:24px;min-height:190px;transition:.35s;transform:translateY(35px);opacity:0;position:relative;overflow:hidden}
+.card.show{transform:none;opacity:1}
+body.light .card{background:rgba(255,255,255,.7);border-color:rgba(0,0,0,.08)}
+.card:hover{transform:translateY(-8px) scale(1.01)}
+.card b{font-size:22px;display:block;margin-bottom:12px;position:relative;z-index:2}
+.card span{color:#9fa6b6;line-height:1.6;position:relative;z-index:2}
+.card::before{content:"";position:absolute;inset:0;background-size:cover;background-position:center;z-index:0}
+.card::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.65);z-index:1}
+
+/* Online images: put the original photos in the images folder with these exact names. */
+.card-music::before{background-image:url('images/music.jpg')}
+.card-photo::before{background-image:url('images/photo.jpg')}
+.card-travel::before{background-image:url('images/travel.jpg')}
+
+/* Social Media Cards */
+.social{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:35px}
+.social a{
+  color:inherit;text-decoration:none;padding:22px;border-radius:20px;
+  border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);
+  display:flex;justify-content:space-between;transition:.25s;position:relative;
+  overflow:hidden;min-height:70px;align-items:center
+}
+.social a::before{content:"";position:absolute;inset:0;background-size:cover;background-position:center;z-index:0;transition:.3s}
+.social a::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.6);z-index:1;transition:.3s}
+.social a:hover::after{background:rgba(0,0,0,0.45)}
+.social a:hover{transform:translateX(7px)}
+.social a span{position:relative;z-index:2;font-weight:700;font-size:16px}
+.social a b{position:relative;z-index:2;font-size:20px}
+
+/* Social images */
+.social-youtube::before{background-image:url('images/youtube.jpg')}
+.social-instagram::before{background-image:url('images/instagram.jpg')}
+.social-facebook::before{background-image:url('images/facebook.jpg')}
+.social-telegram::before{background-image:url('images/telegram.jpg')}
+.social-twitter::before{background-image:url('images/twitter.jpg')}
+.social-website::before{background-image:url('images/website.jpg')}
+
+footer{padding:45px 7%;text-align:center;color:#777;border-top:1px solid rgba(255,255,255,.08)}
+#intro{position:fixed;inset:0;background:#05060a;z-index:50;display:grid;place-items:center;text-align:center;padding:30px;transition:opacity .7s,visibility .7s}
+#intro.hide{opacity:0;visibility:hidden}
+.intro-box{max-width:650px}
+.intro-box .mini{font-size:13px;letter-spacing:4px;color:#8f9bff;margin-bottom:20px}
+.intro-box h3{font-size:clamp(38px,8vw,76px);letter-spacing:-3px}
+.intro-box p{color:#9298a7;margin:18px 0 28px;line-height:1.6}
+.actions{display:flex;justify-content:center;gap:12px}
+.actions button{padding:14px 25px;border-radius:13px;border:1px solid #333;background:#151821;color:#fff;font-weight:800;cursor:pointer}
+.actions .yes{background:#fff;color:#111}
+.reveal{opacity:0;transform:translateY(45px);transition:1s ease}
+.reveal.show{opacity:1;transform:none}
+
+/* Welcome card with online background */
+.welcome-card {
+  position:relative;border-radius:20px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,0.6);
+  background:url('images/welcome.jpg') center/cover no-repeat;margin:30px auto;max-width:500px
+}
+.welcome-card::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.5),rgba(0,0,0,0.8));z-index:1}
+.welcome-card .card-content{position:relative;z-index:2;padding:40px 25px 50px;text-align:center;color:#fff}
+.welcome-card h1{font-size:2.2rem;margin-bottom:15px;line-height:1.2}
+.welcome-card .gradient-text{background:linear-gradient(90deg,#ff6b6b,#f06595,#cc5de8,#845ef7,#5c7cfa,#339af0,#22b8cf,#20c997,#51cf66,#94d82d,#ffd43b);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+.welcome-card p{font-size:1.05rem;margin-bottom:25px;color:#eaeaea;line-height:1.5}
+.welcome-card .cta{display:inline-block;padding:12px 28px;background:linear-gradient(90deg,#6a11cb,#2575fc);color:#fff;text-decoration:none;border-radius:50px;font-weight:600;font-size:1rem;transition:transform 0.2s ease,box-shadow 0.2s ease;box-shadow:0 6px 20px rgba(37,117,252,0.5)}
+.welcome-card .cta:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(37,117,252,0.7)}
+@media(max-width:700px){.cards{grid-template-columns:1fr}.social{grid-template-columns:1fr}header{padding:0 5%}section{padding:105px 6%}.nav{gap:5px}h1{letter-spacing:-3px}}
+</style>
+</head>
+<body>
+<div id="bg"></div>
+
+<div id="intro">
+  <div class="intro-box">
+    <div class="mini">WELCOME TO TSB </div>
+    <h3>Are you ready<br><span class="gradient">to explore?</span></h3>
+    <div class="actions">
+      <button class="yes" onclick="enterSite()">YES </button>
+      <button onclick="leaveSite()">NO</button>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="logo">Keshav </div>
+  <div class="mini"><button class="icon" id="theme" title="Dark / Light">☼</button></div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-inner reveal">
+    <div><h1> Keshav Das </h1></div>
+    <div class="badge"> Chokaghat . Varanasi. Uttar Pradesh </div>
+    <div class="welcome-card">
+      <div class="card-content">
+        <h1>Welcome to <span class="gradient-text">my world.</span></h1>
+        <p>Hamari Duniya Me aap ka Swagat hai. Hamare bare me aur jananae ke liye.. नीचे scroll करें।</p>
+        <a class="cta" href="#about">Explore ↓</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="content reveal">
+    <div class="kicker">01 — About</div>
+    <h2>थोड़ा मेरे बारे में।</h2>
+    <p class="text"> Hame Music, Game, Computer ke sath content creation aur photography me bhi ruchi rakhate hain . </p>
+    <div class="cards">
+      <div class="card card-music show"><b>Music</b><span>Bachapan se Hame Music se lagaw raha hai. ek Sangit hi hai jo hame sabasre jada pasand aati hai . sangit ka rista hamare liye esa hai mano ham..</span></div>
+      <div class="card card-photo show"><b>Photography</b><span>photography hamari dusari sanbase jada pasandida chiz hai.. aas pas ki sunadarata aur nature ki khubsurti ko ek satha sanjoh ke rakh le ..</span></div>
+      <div class="card card-travel show"><b>Travel</b><span>Bat kar Travling ki Duniya ko aur karib se samajhane ki ikasha aur naye logo se Milana.. nayi jankari .. dunaya ka use janana .. ye bhi Hamari pasandida chiz hai...</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="links">
+  <div class="content reveal">
+    <div class="kicker">02 — Connect</div>
+    <h2>मेरी दुनिया से जुड़ें।</h2>
+    <p class="text"> Aiye Hamare bare me me aur karib se jane .. Niche diye gaye .. social media handles per click Karen... </p>
+    <div class="social">
+      <a href="https://youtu.be/97zQ8m3PzuE?si=RzU99645ynk-5gNS" class="social-youtube"><span>YouTube</span><b>↗</b></a>
+      <a href="https://www.instagram.com/trayambakeshwarbari?igsi=MTQyNHRmdnd5N3VvZA==" class="social-instagram"><span>Instagram</span><b>↗</b></a>
+      <a href="https://www.facebook.com/share/1EBmXpH8Nu/" class="social-facebook"><span>Facebook</span><b>↗</b></a>
+      <a href="#" class="social-telegram"><span>Telegram</span><b>↗</b></a>
+      <a href="#" onclick="demo(event,'X / Twitter')" class="social-twitter"><span>X / Twitter</span><b>↗</b></a>
+      <a href="#" onclick="demo(event,'Website')" class="social-website"><span>My Website</span><b>↗</b></a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="content reveal">
+    <div class="kicker">03 — Contact</div>
+    <h2>Let's connect.</h2>
+    <p class="text"> Hamri duniye me aane ke liye Dhanyawaad.. hamare baare me aap ko kesa laga aapani Rai hamen jarur bataen 🥰 </p>
+    <a class="cta" href="mailto:trambakeshwar772288bari@gmail.com">Contact Me →</a>
+  </div>
+</section>
+</main>
+
+<footer> © 2026 - TSB — All rights reserved.</footer>
+
+<script>
+function enterSite(){
+  document.getElementById('intro').classList.add('hide');
+  setTimeout(()=>document.querySelector('.hero .reveal').classList.add('show'),250);
+}
+function leaveSite(){
+  document.getElementById('intro').innerHTML='<div class="intro-box"><div class="gradient">TSB</div><h1>कोई बात नहीं 👋</h1><p>जब मन करे, वापस आइए।</p></div>';
+}
+function demo(e,name){
+  e.preventDefault();
+  alert(name+' link यहाँ आपका असली link लगाया जाएगा।');
+}
+document.getElementById('theme').onclick=()=>{
+  document.body.classList.toggle('light');
+  document.getElementById('theme').textContent=document.body.classList.contains('light')?'☾':'☼';
+};
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')});
+},{threshold:.12});
+document.querySelectorAll('.reveal,.card').forEach(x=>observer.observe(x));
+</script>
+</body>
+  </html>
+  
